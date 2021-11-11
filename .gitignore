@@ -2,6 +2,7 @@ script/
 data/
 codetest/
 reference/
+tutorial*
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
