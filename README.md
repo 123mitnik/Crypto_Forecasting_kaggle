@@ -5,16 +5,22 @@
 
 The simultaneous activity of thousands of traders ensures that most **signals** will be transitory, persistent **alpha** will be exceptionally difficult to find, and the danger of **overfitting** will be considerable. In addition, since 2018, interest in the cryptomarket has exploded, so the **volatility** and **correlation structure** in our data are likely to be highly non-stationary. The successful contestant will pay careful attention to these considerations, and in the process gain valuable insight into the art and science of financial forecasting.
 
-## Evaluation
+## Github file info (updating)
 
-Submissions are evaluated on a weighted version of the [Pearson correlation coefficient](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient). You can find additional details in the ['Prediction Details and Evaluation'](https://www.kaggle.com/cstein06/tutorial-to-the-g-research-crypto-competition) section of this tutorial notebook.
-
-## Requirement
-
-Submissions to this competition must be made through Notebooks. In order for the "Submit" button to be active after a commit, the following conditions must be met:
-
-- CPU Notebook <= 9 hours run-time
-- GPU Notebook <= 9 hours run-time
-- Internet access disabled
-- Freely & publicly available external data is allowed, including pre-trained models
-- Submission file must be named submission.csv
+- `statistical-analysis-additional.ipynb`: explore the crypto market by 
+    - frequency manipulation `script/morestates.py -> ts_with_frequency()`
+    - autocorrelation
+    - time-series decomposition `script/morestates.py -> ts_decomp()`
+    - stationarity tests 
+- `MA_cross_strategy.ipynb`: Moving Average Crossing example of **trading strategy**, **backtesting** and **evaluation**.
+    - generate strategy signals: `script/strategy.py -> mac()`
+    - backtest: `script/backtest.py -> bt()`
+    - evaluation: 
+        - Sharpe ratio
+        - Maximum Drawdown
+        - Compound Annual Growth Rate (CAGR)      
+        - distribution of returns
+        - trade-level metrics
+- `cointegration_strategy.ipynb`: Cointegration Strategy 
+    - `statsmodels.tsa.stattools.coint` 
+    - $y_{t}-\beta x_{t}=u_{t}$
