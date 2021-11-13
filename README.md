@@ -11,7 +11,7 @@ The simultaneous activity of thousands of traders ensures that most **signals** 
     - frequency manipulation `script/morestates.py -> ts_with_frequency()`
     - autocorrelation
     - time-series decomposition `script/morestates.py -> ts_decomp()`
-    - stationarity tests 
+    - stationarity tests `Augmented Dickey-Fuller test` 
 - `MA_cross_strategy.ipynb`: Moving Average Crossing example of **trading strategy**, **backtesting** and **evaluation**.
     - generate strategy signals: `script/strategy.py -> mac()`
     - backtest: `script/backtest.py -> bt()`
