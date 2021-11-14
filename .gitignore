@@ -3,6 +3,8 @@ data/
 codetest/
 reference/
 tutorial*
+pic/*.pages
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
