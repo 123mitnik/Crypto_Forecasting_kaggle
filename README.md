@@ -16,6 +16,14 @@ The simultaneous activity of thousands of traders ensures that most **signals** 
     - time-series decomposition `script/morestates.py -> ts_decomp()`
     - stationarity tests `Augmented Dickey-Fuller test` 
 
+### Neural Network Forecasting
+
+- `RNN_forecasting.ipynb`: Do RNN forecasting on the BTC price.
+    - Tensorflow
+    - Keras: `tensorflow.keras`
+    - RNN-LSTM: `tensorflow.keras.layers.LSTM`
+
+
 ### Trading Strategy
 - `MA_cross_strategy.ipynb`: Moving Average Crossing example of **trading strategy**, **backtesting** and **evaluation**.
     - generate strategy signals: `script/strategy.py -> mac()`
