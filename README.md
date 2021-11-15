@@ -18,7 +18,7 @@ The simultaneous activity of thousands of traders ensures that most **signals** 
 
 ### Neural Network Forecasting
 
-- `RNN_forecasting.ipynb`: Do RNN forecasting on the BTC price.
+- `RNN_forecasting.ipynb`: Do RNN forecasting on the BTC OHLCV info.
     - Tensorflow
     - Keras: `tensorflow.keras`
     - RNN-LSTM: `tensorflow.keras.layers.LSTM`
