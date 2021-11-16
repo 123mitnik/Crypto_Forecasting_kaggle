@@ -5,6 +5,7 @@ reference/
 tutorial*
 pic/*.pages
 logs/
+trainedNN/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
