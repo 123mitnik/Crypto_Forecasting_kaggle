@@ -22,6 +22,9 @@ The simultaneous activity of thousands of traders ensures that most **signals** 
     - Tensorflow
     - Keras: `tensorflow.keras`
     - RNN-LSTM: `tensorflow.keras.layers.LSTM`
+- `crypto_lstm.ipynb`: Manage the Kaggle competition with LSTM forecasting on the 14 cryptocurrency returns simulaneously.
+    - Tensorflow
+    - Keras
 
 
 ### Trading Strategy
