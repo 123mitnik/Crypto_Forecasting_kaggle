@@ -1,14 +1,15 @@
 import pandas as pd
 import numpy as np
+import datatable as dt
 import os
 
 # WHICH YEARS TO INCLUDE
-INC2021 = 0
-INC2020 = 0
+INC2021 = 1
+INC2020 = 1
 INC2019 = 0
 INC2018 = 0
 INC2017 = 0
-INCCOMP = 1
+INCCOMP = 0
 INCSUPP = 0
 if __name__ != '__main__':
     input = [INC2021,INC2020,INC2019,INC2018 ,INC2017 ,INCCOMP ,INCSUPP]
@@ -33,11 +34,13 @@ extra_data_files = {0: data_path+'/cryptocurrency-extra-data-binance-coin',
                     12: data_path+'/cryptocurrency-extra-data-stellar', 
                     13: data_path+'/cryptocurrency-extra-data-tron'}
 print('loading preparing')
-orig_df_train = pd.read_csv(data_path + '/train.csv') 
-supp_df_train = pd.read_csv(data_path + '/supplemental_train.csv')
-#df_asset_details = pd.read_csv(data_path  + '/asset_details.csv').sort_values("Asset_ID")
+# orig_df_train = pd.read_csv(data_path + '/train.csv') 
+# supp_df_train = pd.read_csv(data_path + '/supplemental_train.csv')
+#faster with .jay
+orig_df_train = dt.fread(data_path+'/cryptocurrency-extra-data-binance-coin/orig_train.jay').to_pandas()
+supp_df_train = dt.fread(data_path+'/cryptocurrency-extra-data-binance-coin/orig_supplemental_train.jay').to_pandas()
 
-def load_training_data_for_asset(asset_id, load_jay = False, includeextra=False):
+def load_training_data_for_asset(asset_id, load_jay = True, includeextra=True):
     dfs = []
     # original data
     if INCCOMP: dfs.append(orig_df_train[orig_df_train["Asset_ID"] == asset_id].copy())
@@ -46,7 +49,8 @@ def load_training_data_for_asset(asset_id, load_jay = False, includeextra=False)
     if includeextra:
         #extra data
         if load_jay:
-            if INC2017 and os.path.exists(extra_data_files[asset_id] + '/full_data__' + str(asset_id) + '__' + str(2017) + '.csv'): dfs.append(dt.fread(extra_data_files[asset_id] + '/full_data__' + str(asset_id) + '__' + str(2017) + '.jay').to_pandas())
+            if INC2017 and os.path.exists(extra_data_files[asset_id] + '/full_data__' + str(asset_id) + '__' + str(2017) + '.csv'): 
+                dfs.append(dt.fread(extra_data_files[asset_id] + '/full_data__' + str(asset_id) + '__' + str(2017) + '.jay').to_pandas())
             if INC2018 and os.path.exists(extra_data_files[asset_id] + '/full_data__' + str(asset_id) + '__' + str(2018) + '.csv'): dfs.append(dt.fread(extra_data_files[asset_id] + '/full_data__' + str(asset_id) + '__' + str(2018) + '.jay').to_pandas())
             if INC2019 and os.path.exists(extra_data_files[asset_id] + '/full_data__' + str(asset_id) + '__' + str(2019) + '.csv'): dfs.append(dt.fread(extra_data_files[asset_id] + '/full_data__' + str(asset_id) + '__' + str(2019) + '.jay').to_pandas())
             if INC2020 and os.path.exists(extra_data_files[asset_id] + '/full_data__' + str(asset_id) + '__' + str(2020) + '.csv'): dfs.append(dt.fread(extra_data_files[asset_id] + '/full_data__' + str(asset_id) + '__' + str(2020) + '.jay').to_pandas())
@@ -62,7 +66,7 @@ def load_training_data_for_asset(asset_id, load_jay = False, includeextra=False)
     df = df.sort_values('date')
     return df
 
-def load_data_for_all_assets(load_jay = False, includeextra=False):
+def load_data_for_all_assets(load_jay = True, includeextra=True):
     dfs = []
     for asset_id in list(extra_data_files.keys()): 
         dfs.append(load_training_data_for_asset(asset_id, load_jay = load_jay, includeextra=includeextra))

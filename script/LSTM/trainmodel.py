@@ -32,6 +32,13 @@ def get_squence_model(x):
     return x
 
 ############################compile model
+'''
+- Lambda layer needed for assets separation;
+- Masking layer. Generated records (filled gaps) has zeros as features values, so they are not used in the computations.
+- Our sequence model architecture(lstm)
+- Concatenation layer
+- Dense layer
+'''
 def get_model(n_assets = 14, trainshape=(15,14,13)):
     x_input = keras.Input(shape=trainshape)
     ##window, n_assets, features
