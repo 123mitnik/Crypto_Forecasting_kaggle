@@ -39,9 +39,10 @@ def get_squence_model(x):
 - Concatenation layer
 - Dense layer
 '''
-def get_model(n_assets = 14, trainshape=(15,14,13)):
+def get_model(n_assets = 14, trainshape=(15,14,12)):
+    #Keras tensor
     x_input = keras.Input(shape=trainshape)
-    ##window, n_assets, features
+    ## parallel sequence model branches
     branch_outputs = []
     for i in range(n_assets):
         # Slicing the ith asset: x_input into x of the lambda function

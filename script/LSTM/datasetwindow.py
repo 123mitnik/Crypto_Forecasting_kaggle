@@ -4,12 +4,13 @@ import numpy as np
 
 class sample_generator(keras.utils.Sequence):
     def __init__(self, x_set, y_set, batch_size, length):
-        #(train, targets) tuple
+        #(train, targets) arrays tuple
         self.x, self.y = x_set, y_set
         self.batch_size = batch_size
-        self.length = length
-        self.size = len(x_set)
+        self.length = length#window size
+        self.size = len(x_set)#unique timestamp size
     def __len__(self): 
+        #number of batchs
         return int(np.ceil(len(self.x) / float(self.batch_size)))
     def __getitem__(self, idx):
         #(train, targets) tuple

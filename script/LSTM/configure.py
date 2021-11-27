@@ -7,7 +7,7 @@ DEBUG = False
 N_ASSETS = 14 #14 assets
 WINDOW_SIZE = 15 #15mins
 BATCH_SIZE = 1024
-PCT_VALIDATION = 5 # last 5% of the data are used as validation set
+PCT_VALIDATION = 10 # last 10% of the data are used as validation set
 if __name__ != '__main__':
     print(f'N_ASSETS = {N_ASSETS}, WINDOW_SIZE ={WINDOW_SIZE}, BATCH_SIZE = {BATCH_SIZE},EPOCHS = {EPOCHS},PCT_VALIDATION={PCT_VALIDATION}')
  
