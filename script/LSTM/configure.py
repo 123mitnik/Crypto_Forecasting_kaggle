@@ -3,7 +3,7 @@ import tensorflow as tf
 DEVICE = "TPU" #or "GPU"
 SEED = 42
 EPOCHS = 20
-DEBUG = False
+DEBUG = True
 N_ASSETS = 14 #14 assets
 WINDOW_SIZE = 15 #15mins
 BATCH_SIZE = 1024

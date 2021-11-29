@@ -63,5 +63,3 @@ def get_model(n_assets = 14, trainshape=(15,14,12)):
 
 
 ##########test
-if __name__ == '__main__':
-    pass
