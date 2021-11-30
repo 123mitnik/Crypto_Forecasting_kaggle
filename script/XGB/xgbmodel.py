@@ -26,6 +26,7 @@ def get_Xy_and_model_for_asset(df_train, asset_id):
     X = df_proc.drop("y", axis=1)
     y = df_proc["y"]
     
+    #Xgboost with Scikit-learn API
     model = xgb.XGBRegressor(
         n_estimators=500,
         max_depth=11,
