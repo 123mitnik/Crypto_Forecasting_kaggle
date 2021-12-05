@@ -5,3 +5,4 @@ pic/*.pages
 logs/
 trainedNN/
 trainedXGB/
+kagglescore*
