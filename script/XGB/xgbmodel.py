@@ -101,4 +101,4 @@ def get_Xy_and_model_for_asset_1(df_train,asset_id):
     model = LGBMRegressor(n_estimators=1000,num_leaves=500,learning_rate=0.1)
     model.fit(X, y)
 
-    return X,y, model
+    return model
