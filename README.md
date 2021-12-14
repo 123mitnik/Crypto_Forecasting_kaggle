@@ -31,6 +31,9 @@ The simultaneous activity of thousands of traders ensures that most **signals** 
 ### XGBoost/LigntGBM Forecasting  
 
 - [crypto-xgb.ipynb](./crypto-xgb.ipynb)
+  - `xgboost`
+  - `lightgbm`
+
 ### Trading Strategy  
 
 - [MA_cross_strategy.ipynb](./MA_cross_strategy.ipynb): Moving Average Crossing example of **trading strategy**, **backtesting** and **evaluation**.
