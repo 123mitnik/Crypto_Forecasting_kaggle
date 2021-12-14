@@ -1,7 +1,7 @@
 import xgboost as xgb
 from lightgbm import LGBMRegressor
-import lightgbm as lgb
-import xgboost as xgb
+#import lightgbm as lgb
+
 import numpy as np
 import gc
 import talib as ta
@@ -60,6 +60,9 @@ params_xgb = {
     'objective':  'reg:squarederror'
 }
 def get_Xy_and_model_for_asset(df_train, asset_id):
+    '''
+    XGBoost
+    '''
     df = df_train[df_train["Asset_ID"] == asset_id]
     df = get_features(df)
     df = add_features(df)
@@ -79,6 +82,9 @@ def get_Xy_and_model_for_asset(df_train, asset_id):
 
 ######################################################lightgbm_model
 def get_Xy_and_model_for_asset_1(df_train,asset_id):
+    '''
+    lightgbm
+    '''
     df = df_train[df_train["Asset_ID"] == asset_id]
     df = df.dropna(subset=['Target'])
     y = df.pop('Target') 
