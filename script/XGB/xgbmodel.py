@@ -1,5 +1,5 @@
 import xgboost as xgb
-from lightgbm import LGBMRegressor
+#from lightgbm import LGBMRegressor
 #import lightgbm as lgb
 
 import numpy as np
@@ -8,8 +8,10 @@ import talib as ta
 import pandas as pd
 import time
 
+from xgboost.core import DMatrix
 
-######################################################initial model train setting
+
+######################################################feature engineering
 # Two new features from the competition tutorial
 def log_return(series, periods=5):
     return np.log(series).diff(periods=periods)
@@ -48,17 +50,45 @@ def add_features(df, usetalib=True):
         df['MIDPOINT'] =ta.MIDPOINT(df['Open'])
         df['TRENDLINE'] =ta.HT_TRENDLINE(df['Open'])
     return df
-
-params_xgb = {
-    'learning_rate': 0.05,
-    'max_depth': 11,
-    'n_estimators': 500,
-    'subsample': 0.9,
-    'colsample_bytree':0.7,
-    'missing':-999,
-    'random_state':2020,
-    'objective':  'reg:squarederror'
+####################################################################################parameters
+params_general ={
+    'booster': 'gbtree',
+    'verbosity':0,
+    'validate_parameters': 1
 }
+params_booster ={
+    'learning_rate': 0.05,
+    'min_split_loss': 0,
+    'max_depth': 11,
+    'min_child_weight': 1,
+    'max_delta_step': 0,
+    'subsample': 0.9,
+    'colsample_bytree': 0.7,
+    'reg_lambda': 1,
+    'reg_alpha': 0,
+    'tree_method': 'hist', #gpu_hist
+    'scale_pos_weight': 1,
+    'predictor': 'auto',
+    'num_parallel_tree': 1
+}
+
+params_learning={
+    'objective': 'reg:squarederror',
+    'base_score': 0.5,
+    'eval_metric': 'rmse',
+    'seed': 2021
+}
+
+params_train={
+    'num_boost_round':500,
+    'early_stopping_rounds':5,
+    'verbose_eval':False
+}
+
+params_xgb = {**params_general,
+            **params_booster,
+            **params_learning}
+
 def get_Xy_and_model_for_asset(df_train, asset_id):
     '''
     XGBoost
@@ -67,16 +97,14 @@ def get_Xy_and_model_for_asset(df_train, asset_id):
     df = get_features(df)
     df = add_features(df)
     df.dropna(axis = 0, inplace= True)
-
-    y = df.pop('Target') 
-    X = df.drop(['timestamp', 'Asset_ID'],axis=1)
+    dtrain=xgb.DMatrix(df.drop(['timestamp', 'Asset_ID'],axis=1),label= df['Target'])
     del df
     gc.collect()
 
     start_time = time.time()
-    #Xgboost with Scikit-learn API
-    model = xgb.XGBRegressor(**params_xgb)
-    model.fit(X, y)
+    #Xgboost with Learning API
+    ##TODO make evals at test data
+    model = xgb.train(params_xgb, dtrain=dtrain, evals=[(df, 'train')], **params_train)
     print("--- %s seconds ---" % (time.time() - start_time))
     return model
 
