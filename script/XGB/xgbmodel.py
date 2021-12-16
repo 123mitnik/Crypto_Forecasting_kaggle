@@ -8,8 +8,6 @@ import talib as ta
 import pandas as pd
 import time
 
-from xgboost.core import DMatrix
-
 
 ######################################################feature engineering
 # Two new features from the competition tutorial
@@ -104,7 +102,7 @@ def get_Xy_and_model_for_asset(df_train, asset_id):
     start_time = time.time()
     #Xgboost with Learning API
     ##TODO make evals at test data
-    model = xgb.train(params_xgb, dtrain=dtrain, evals=[(df, 'train')], **params_train)
+    model = xgb.train(params_xgb, dtrain=dtrain, evals=[(dtrain, 'train')], **params_train)
     print("--- %s seconds ---" % (time.time() - start_time))
     return model
 
@@ -113,20 +111,21 @@ def get_Xy_and_model_for_asset_1(df_train,asset_id):
     '''
     lightgbm
     '''
-    df = df_train[df_train["Asset_ID"] == asset_id]
-    df = df.dropna(subset=['Target'])
-    y = df.pop('Target') 
-    df_proc = get_features(df)
-    del df
-    df_proc = add_features(df_proc)
-    df_proc = df_proc.fillna(-1)
-    X = df_proc.drop(['timestamp', 'Asset_ID'],axis=1)
-    #print(f'features:{X.columns}')
-    del df_proc
-    gc.collect()
+    pass
+    # df = df_train[df_train["Asset_ID"] == asset_id]
+    # df = df.dropna(subset=['Target'])
+    # y = df.pop('Target') 
+    # df_proc = get_features(df)
+    # del df
+    # df_proc = add_features(df_proc)
+    # df_proc = df_proc.fillna(-1)
+    # X = df_proc.drop(['timestamp', 'Asset_ID'],axis=1)
+    # #print(f'features:{X.columns}')
+    # del df_proc
+    # gc.collect()
 
-    #lightxgboost
-    model = LGBMRegressor(n_estimators=1000,num_leaves=500,learning_rate=0.1)
-    model.fit(X, y)
+    # #lightxgboost
+    # model = LGBMRegressor(n_estimators=1000,num_leaves=500,learning_rate=0.1)
+    # model.fit(X, y)
 
-    return model
+    # return model
