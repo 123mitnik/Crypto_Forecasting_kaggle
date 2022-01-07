@@ -91,11 +91,13 @@ def get_Xy_and_model_for_asset(df_train, asset_id):
     '''
     XGBoost
     '''
+    pd.options.mode.chained_assignment = None  # default='warn'
     df = df_train[df_train["Asset_ID"] == asset_id]
     df = get_features(df)
     df = add_features(df)
     df.dropna(axis = 0, inplace= True)
-    dtrain=xgb.DMatrix(df.drop(['timestamp', 'Asset_ID'],axis=1),label= df['Target'])
+    dtrain=xgb.DMatrix(df.drop(['timestamp', 'Asset_ID','Target'],axis=1)
+                        , label= df['Target'])
     del df
     gc.collect()
 
