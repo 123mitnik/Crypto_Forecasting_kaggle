@@ -7,8 +7,8 @@ import os
 INC2021 = 1
 INC2020 = 1
 INC2019 = 1
-INC2018 = 0
-INC2017 = 0
+INC2018 = 1
+INC2017 = 1
 INCCOMP = 0
 INCSUPP = 0
 
@@ -68,19 +68,36 @@ def load_data_for_all_assets(load_jay = True, includeextra=True):
     return train[['timestamp','Asset_ID','Count', 'Open', 'High', 'Low', 'Close', 'Volume', 'VWAP', 'Target']]
 
 train = load_data_for_all_assets(load_jay = True, includeextra=True)
-print(train.head())
 
-#check nan
-for i in range(14):
-    dfcrop=train[train['Asset_ID']==i]
-    print('Percentage of values not nan',(1-(np.sum((dfcrop['Target'].isnull()).astype(int))/dfcrop.shape[0]))*100)
+# fillin missing/inf VWAP with average of high & low
+train.replace([np.inf, -np.inf], np.nan, inplace=True)
+train['VWAP']=train['VWAP'].fillna((train['High']+train['Low'])/2)
 
-print('saving data')
+# adjust wrong new VWAP as average of high&low 
+train.loc[train['timestamp']>1632182400,'VWAP']= (train.loc[train['timestamp']>1632182400,'High'] + 
+                                                  train.loc[train['timestamp']>1632182400,'Low'])/2
+
+asset_detail = dt.fread(data_path+'/cryptocurrency-extra-data-binance-coin/orig_asset_details.jay').to_pandas()
+weight_dict=dict(zip(asset_detail.Asset_ID, asset_detail.Weight))
+train['Weight']=train['Asset_ID'].map(weight_dict)
+crypto_index = train.groupby('timestamp').apply( 
+    lambda x: (x['VWAP']*x['Weight']).sum()/(x['Weight'].sum()) 
+    )
+
+crypto_index=pd.DataFrame(crypto_index).reset_index()
+crypto_index.columns = ['timestamp','Crypto_Index']
+
+##merge with train_data
+train=train.merge(crypto_index, on='timestamp',how='left')
+
+#check the nan/inf again
+train.loc[train.isin([np.nan, np.inf, -np.inf]).any(axis=1)]
+
+## save organized data for use
 train.reset_index().to_feather(data_path+'/new_data.ftr')
 #print(pd.read_feather(data_path+'/new_data.ftr'))
 
-#check time range
-print(pd.to_datetime(train["timestamp"],unit="s",infer_datetime_format=True))
+
 
 
 

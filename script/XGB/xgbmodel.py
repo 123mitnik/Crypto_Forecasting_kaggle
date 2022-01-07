@@ -25,6 +25,7 @@ def get_features(df_feat):
     df_feat['Upper_Shadow'] = upper_shadow(df_feat)
     df_feat['Lower_Shadow'] = lower_shadow(df_feat)
     return df_feat
+
 def add_features(df, usetalib=True):
     df['lrtn_1'] = log_return(df['Close'],periods=1)
     df['lrtn_4'] = log_return(df['Close'],periods=4)
