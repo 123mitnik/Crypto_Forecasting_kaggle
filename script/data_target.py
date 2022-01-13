@@ -6,9 +6,6 @@ https://www.kaggle.com/cstein06/tutorial-to-the-g-research-crypto-competition.
 import numpy as np
 
 def ResidualizeMarket(df, mktColumn, window):
-  if mktColumn not in df.columns:
-    return df
-
   mkt = df[mktColumn]
 
   num = df.multiply(mkt.values, axis=0).rolling(window).mean().values  #numerator of linear regression coefficient
