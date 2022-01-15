@@ -21,10 +21,13 @@ def lower_shadow(df):
 
 def lag_features(df):
     #Close-log-return
-    df['lrtn_close_5'] = log_return(df['Close'],periods=5)
-    df['lrtn_close_15'] = log_return(df['Close'],periods=15)
+    #df['lrtn_close_5'] = log_return(df['Close'],periods=5)
+    #df['lrtn_close_15'] = log_return(df['Close'],periods=15)
     df['lrtn_index_5'] = log_return(df['Crypto_Index'],periods=5)
     df['lrtn_index_15'] = log_return(df['Crypto_Index'],periods=15)
+    
+    #lr_mkt_resid sma
+    df['lr_mkt_resid_sma'] = ta.SMA(df['lr_mkt_resid'],5)
     
     #15minutes-volume-sum/delta, on-balance-volume
     df['vol_sum_15'] = ta.SMA(df['Volume'],15)*15
@@ -51,12 +54,11 @@ def lag_features(df):
     df['close_bollinger_up_15'] = ta.SUB(band_up, df['Close'])
     df['close_bollinger_down_15'] = ta.SUB(df['Close'], band_down)
 
-def get_features(df_feat, lagfeatures=False):
+def get_features(df_feat):
     pd.options.mode.chained_assignment = None  # default='warn'
     df_feat['Upper_Shadow'] = upper_shadow(df_feat)
     df_feat['Lower_Shadow'] = lower_shadow(df_feat)
-    if lagfeatures:
-        lag_features(df_feat)
+    lag_features(df_feat)
     return df_feat
 ####################################################################################parameters
 params_general ={
