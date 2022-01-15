@@ -3,9 +3,6 @@ import numpy as np
 import pandas as pd
 from numpy import dtype
 
-# asset_details = pd.read_csv('../data/asset_details.csv')
-# id_2_weight = dict(zip(asset_details.Asset_ID, asset_details.Weight))
-
 dtypes = {'timestamp': np.int64, 'Asset_ID': np.int8,
           'Count': np.int32,     'Open': np.float64,
           'High': np.float64,    'Low': np.float64,
