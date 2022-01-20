@@ -6,19 +6,6 @@ https://www.kaggle.com/cstein06/tutorial-to-the-g-research-crypto-competition.
 import numpy as np
 import talib as ta
 
-def ResidualizeMarket(df, mktColumn, window):
-  mkt = df[mktColumn]
-
-  num = df.multiply(mkt.values, axis=0).rolling(window).mean().values  #numerator of linear regression coefficient
-  denom = mkt.multiply(mkt.values, axis=0).rolling(window).mean().values  #denominator of linear regression coefficient
-  beta = np.nan_to_num( num.T / denom, nan=0., posinf=0., neginf=0.)  #if regression fell over, use beta of 0
-
-  resultRet = df - (beta * mkt.values).T  #perform residualization
-  resultBeta = 0.*df + beta.T  #shape beta
-
-  return resultRet.drop(columns=[mktColumn]), resultBeta.drop(columns=[mktColumn])
-
-
 
 def beta(df, window=3750): 
   '''
@@ -35,11 +22,11 @@ def make_target(dd):
   ##shift [lr_15,Mkt_lrt_15] backward by 16
   ddd=dd.groupby('Asset_ID').apply(lambda x: x[['lr_15','Mkt_lrt_15']].shift(-16))
   ddd.columns = ['R_15','Mkt_lrt']
-  dd= dd.merge(ddd, on =['Asset_ID','timestamp'],how='left')
+  dd= dd.merge(ddd, on =['timestamp','Asset_ID'],how='left')
   ##make beta  
   ddd=dd.groupby("Asset_ID").apply(lambda x: beta(x)).rename("beta").to_frame().reset_index(0,drop=True)
   ddd=ddd.replace([np.nan,np.inf,-np.inf], 0)
-  dd= dd.merge(ddd, on =['Asset_ID','timestamp'],how='left')
+  dd= dd.merge(ddd, on =['timestamp','Asset_ID'],how='left')
   ##make target
   dd['Target2']=ta.SUB(dd.R_15 , ta.MULT(dd.beta,dd.Mkt_lrt))
   return dd
