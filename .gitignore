@@ -6,3 +6,5 @@ logs/
 trainedNN/
 trainedXGB/
 kagglescore*
+binanceapi.py
+binance*
