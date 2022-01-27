@@ -170,6 +170,9 @@ def make_tune(df_retrain,df_test,params_xgb, feature_params, save_folder):
     
     score_on_test = test_score(df_test,models,feature_params)
     print(f"score-on-test: {score_on_test}")
+    if score_on_test < 0.012:
+        print("No improvement!!")
+        return score_cv,score_on_test,None
     score_on_train =test_score(df_retrain[df_retrain['timestamp']>=df_retrain['timestamp'].quantile(0.75)],
                                models,feature_params)
     print(f"score-on-train: {score_on_train}")
