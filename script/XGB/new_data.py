@@ -4,6 +4,7 @@ import gc
 
 origin_train = pd.read_csv('./data/train.csv')
 origin_sup = pd.read_csv('./data/supplemental_train.csv')
+
 train = pd.concat([origin_train,origin_sup])
 del origin_train, origin_sup
 gc.collect()

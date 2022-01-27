@@ -18,7 +18,7 @@ def make_target(dd):
   '''
   input dd: a dataframe with columns [lr_15,Mkt_lrt_15].
   '''
-  dd.set_index(['timestamp','Asset_ID'],inplace=True)
+  #dd.set_index(['timestamp','Asset_ID'],inplace=True)
   ##shift [lr_15,Mkt_lrt_15] backward by 16
   ddd=dd.groupby('Asset_ID').apply(lambda x: x[['lr_15','Mkt_lrt_15']].shift(-16))
   ddd.columns = ['R_15','Mkt_lrt']
