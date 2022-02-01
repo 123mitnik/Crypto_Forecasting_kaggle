@@ -27,17 +27,18 @@ The simultaneous activity of thousands of traders ensures that most **signals** 
   - Tensorflow
   - Keras: `tensorflow.keras`
   - RNN-LSTM: `tensorflow.keras.layers.LSTM`
-- [crypto_lstm.ipynb](./crypto_lstm.ipynb): Manage the Kaggle competition with LSTM forecasting on the 14 cryptocurrencies returns simulaneously.
-  - Tensorflow
-  - Keras
+- [crypto_lstm.ipynb](./crypto_lstm.ipynb), [my-crypto-lstm.ipynb](./my-crypto-lstm.ipynb): Manage the Kaggle competition with LSTM forecasting on the 14 cryptocurrencies returns simulaneously.
 
 ## 2.3 XGBoost/LigntGBM Forecasting (Core)  
-
-- [crypto-xgb.ipynb](./crypto-xgb.ipynb)
+- [crypto-xgb.ipynb](./crypto-xgb.ipynb): Example xgboost modeling.
   - `xgboost`: [model script](./script/XGB/xgbmodel.py)
   - `lightgbm`
-  - `Hyperparameters CV-Tune`: [crypto-xgb-cv.ipynb](./crypto-xgb-cv.ipynb)
 
+- [crypto-xgb-paramstune.ipynb](./crypto-xgb-paramstune.ipynb): tune xgboost hyperparameters and feature parameters.
+  - `xgb.cv`
+  - `sklearn.model_selection.ParameterSampler`
+- [crypto-xgb-scoring.ipynb](./crypto-xgb-scoring.ipynb): Use the weighted correlation metric to score the models' prediction as the Competition.
+- [crypto-xgb-api.ipynb](./crypto-xgb-api.ipynb): Debug the kaggle competition submission API.
 ## 2.4 Trading Strategy (backtest simulation)  
 
 - [MA_cross_strategy.ipynb](./MA_cross_strategy.ipynb): Moving Average Crossing example of **trading strategy**, **backtesting** and **evaluation**.
