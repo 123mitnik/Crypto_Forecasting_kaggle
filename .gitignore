@@ -5,7 +5,6 @@ pic/*.pages
 logs/
 trainedNN/
 trainedXGB/
-kagglescore*
 binanceapi.py
 binance*
 model_local*
