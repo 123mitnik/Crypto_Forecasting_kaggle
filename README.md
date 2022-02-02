@@ -27,7 +27,7 @@ The simultaneous activity of thousands of traders ensures that most **signals** 
   - Tensorflow
   - Keras: `tensorflow.keras`
   - RNN-LSTM: `tensorflow.keras.layers.LSTM`
-- [crypto_lstm.ipynb](./crypto_lstm.ipynb), [my-crypto-lstm.ipynb](./my-crypto-lstm.ipynb): Manage the Kaggle competition with LSTM forecasting on the 14 cryptocurrencies returns simulaneously.
+- [my-crypto-lstm.ipynb](./my-crypto-lstm.ipynb): Manage the Kaggle competition with LSTM forecasting on the 14 cryptocurrencies returns simulaneously.
 
 ## 2.3 XGBoost/LigntGBM Forecasting (Core)  
 - [crypto-xgb.ipynb](./crypto-xgb.ipynb): Example xgboost modeling.
