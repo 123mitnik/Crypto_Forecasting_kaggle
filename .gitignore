@@ -1,4 +1,5 @@
 data/
+data/datamysql.py
 reference/
 tutorial*
 pic/*.pages
@@ -8,3 +9,4 @@ trainedXGB/
 binanceapi.py
 binance*
 model_local*
+mysql_configure

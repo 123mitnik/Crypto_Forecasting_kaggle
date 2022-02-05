@@ -18,6 +18,11 @@ def read_csv_slice(file_path, dtypes=dtypes, use_window=None):
         df = df[(df.timestamp >= use_window[0]) & (df.timestamp < use_window[1])]
     return df
 
+def read_sql_slice(con, dtypes=dtypes, use_window=None):
+    df = pd.read_sql(f"select * from mycrypto.kaggle_train where timestamp>={use_window[0]} and timestamp <= {use_window[1]}"
+                     , con)
+    return df
+
 def weighted_correlation(a, b, weights):
     w = np.ravel(weights)
     a = np.ravel(a)
