@@ -1,5 +1,15 @@
 # 1. Kaggle competition: [G-Research Crypto Forecasting](https://www.kaggle.com/c/g-research-crypto-forecasting/overview)
+2022-02-22
+<!-- TOC -->
 
+- [1. Kaggle competition: G-Research Crypto Forecasting](#1-kaggle-competition-g-research-crypto-forecasting)
+- [2. Github file info (updating)](#2-github-file-info-updating)
+  - [2.1 Statistical Inference](#21-statistical-inference)
+  - [2.2 Neural Network Forecasting](#22-neural-network-forecasting)
+  - [2.3 XGBoost/LigntGBM Forecasting (Core)](#23-xgboostligntgbm-forecasting-core)
+  - [2.4 Trading Strategy (backtest simulation)](#24-trading-strategy-backtest-simulation)
+
+<!-- /TOC -->
 
 ![Data Frame preview](./pic/datapic.png)
 <img src="./pic/assetlist.png" alt="Asset List" width="200" height="200"/>
