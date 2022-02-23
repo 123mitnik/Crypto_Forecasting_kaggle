@@ -10,3 +10,4 @@ binanceapi.py
 binance*
 model_local*
 mysql_configure
+__pycache__
