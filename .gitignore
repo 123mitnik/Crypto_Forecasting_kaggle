@@ -11,3 +11,4 @@ binance*
 model_local*
 mysql_configure
 __pycache__
+.ipynb_checkpoints
