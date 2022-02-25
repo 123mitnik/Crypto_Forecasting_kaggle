@@ -40,9 +40,6 @@ The simultaneous activity of thousands of traders ensures that most **signals** 
 - [my-crypto-lstm.ipynb](./my-crypto-lstm.ipynb): Manage the Kaggle competition with LSTM forecasting on the 14 cryptocurrencies returns simulaneously.
 
 ## 2.3 XGBoost/LigntGBM Forecasting (Core)  
-- [crypto-xgb.ipynb](./crypto-xgb.ipynb): Example xgboost modeling.
-  - `xgboost`: [model script](./script/XGB/xgbmodel.py)
-  - `lightgbm`
 
 - [crypto-xgb-paramstune.ipynb](./crypto-xgb-paramstune.ipynb): tune xgboost hyperparameters and feature parameters.
   - `xgb.cv`
